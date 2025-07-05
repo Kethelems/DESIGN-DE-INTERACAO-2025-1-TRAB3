@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Páginas HTML</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="text-center mb-4">Gerador de Páginas HTML</h1>
+        
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="editor-panel">
+                    <ul class="nav nav-tabs" id="editorTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="header-tab" data-bs-toggle="tab" data-bs-target="#header" type="button" role="tab" aria-controls="header" aria-selected="true">Cabeçalho</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="menu-tab" data-bs-toggle="tab" data-bs-target="#menu" type="button" role="tab" aria-controls="menu" aria-selected="false">Menu</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="gallery-tab" data-bs-toggle="tab" data-bs-target="#gallery" type="button" role="tab" aria-controls="gallery" aria-selected="false">Galeria</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="form-tab" data-bs-toggle="tab" data-bs-target="#form" type="button" role="tab" aria-controls="form" aria-selected="false">Formulário</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="footer-tab" data-bs-toggle="tab" data-bs-target="#footer" type="button" role="tab" aria-controls="footer" aria-selected="false">Rodapé</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="general" aria-selected="false">Geral</button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content" id="editorTabsContent">
+                      
+                        <div class="tab-pane fade show active" id="header" role="tabpanel" aria-labelledby="header-tab">
+                            <h3>Configurações do Cabeçalho</h3>
+                            <div class="mb-3">
+                                <label for="header-bg-color" class="form-label">Cor de fundo</label>
+                                <input type="color" class="form-control color-picker" id="header-bg-color" value="#ffffff">
+                            </div>
+                            <div class="mb-3">
+                                <label for="header-padding" class="form-label">Espaçamento (padding)</label>
+                                <input type="range" class="form-range" id="header-padding" min="0" max="50" value="20">
+                                <span id="header-padding-value">20px</span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Elementos do Cabeçalho (Máximo 3)</label>
+                                <div id="header-elements">
+                                    <div class="header-element">
+                                        <select class="form-select mb-2 element-type">
+                                            <option value="logo">Logo (Imagem)</option>
+                                            <option value="title">Título</option>
+                                            <option value="banner">Banner (Imagem)</option>
+                                        </select>
+                                        <div class="element-options logo-options">
+                                          <div class="mb-2">
+                                              <label class="form-label">Largura (px)</label>
+                                              <input type="number" class="form-control logo-width" value="200" min="50" max="500">
+                                          </div>
+                                          <div class="mb-2">
+                                            <label class="form-label">Imagem Padrão (Apenas Visualização)</label>
+                                            <select class="form-select logo-url">
+                                                <option value="/api/placeholder/200/80">Logo Padrão</option>
+                                      
+                                            </select>
+                                        </div>
+                                        
+                                      
+                                          <div class="mb-2">
+                                              <label class="form-label">Envie sua imagem:</label>
+                                              <input type="file" class="form-control logo-upload" accept="image/*">
+                                          </div>
+                                      
+                                          <div class="mb-2">
+                                            <img class="logo-preview" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Prévia do logo" style="max-width: 200px; display: none;" />
+                                          </div>
+                                      </div>
+                                        <div class="element-options title-options d-none">
+                                            <div class="mb-2">
+                                                <label class="form-label">Texto do Título</label>
+                                                <input type="text" class="form-control title-text" value="Meu Site">
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-label">Cor do Texto</label>
+                                                <input type="color" class="form-control color-picker title-color" value="#000000">
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-label">Tamanho da Fonte (px)</label>
+                                                <input type="number" class="form-control title-size" value="36" min="12" max="72">
+                                            </div>
+                                        </div>
+                                        <div class="element-options banner-options d-none">
+                                          <div class="mb-2">
+                                              <label class="form-label">URL do Banner</label>
+                                              <select class="form-select banner-url">
+                                                  <option value="/api/placeholder/700/150">Banner Padrão (Apenas Visualização)</option>
+                                      
+                                              </select>
+                                          </div>
+                                          <div class="mb-2">
+                                              <label class="form-label">Altura (px)</label>
+                                              <input type="number" class="form-control banner-height" value="150" min="50" max="300">
+                                          </div>
+                                         
+                                          <div class="mb-2">
+                                              <label class="form-label">Envie sua imagem para o banner:</label>
+                                              <input type="file" class="form-control banner-upload" accept="image/*">
+                                          </div>
+                                          <div class="mb-2">
+                                              <img class="banner-preview" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Prévia do banner" style="max-width: 100%; display: none;" />
+                                          </div>
+                                   
+                                        </div>
+                                        <button class="btn btn-danger btn-sm mt-2 remove-element">Remover</button>
+                                    </div>
+                                </div>
+                                <button id="add-header-element" class="btn btn-primary mt-2">Adicionar Elemento</button>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Alinhamento dos elementos</label>
+                                <select class="form-select" id="header-flex-direction">
+                                    <option value="row">Horizontal</option>
+                                    <option value="column">Vertical</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Distribuição dos elementos</label>
+                                <select class="form-select" id="header-justify-content">
+                                    <option value="flex-start">Início</option>
+                                    <option value="center">Centro</option>
+                                    <option value="flex-end">Fim</option>
+                                    <option value="space-between">Espaçados</option>
+                                    <option value="space-around">Distribuídos</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="menu" role="tabpanel" aria-labelledby="menu-tab">
+                            <h3>Configurações do Menu</h3>
+                            <div class="mb-3">
+                                <label for="menu-bg-color" class="form-label">Cor de fundo do Menu</label>
+                                <input type="color" class="form-control color-picker" id="menu-bg-color" value="#f8f9fa">
+                            </div>
+                            <div class="mb-3">
+                                <label for="menu-item-bg-color" class="form-label">Cor de fundo dos Itens</label>
+                                <input type="color" class="form-control color-picker" id="menu-item-bg-color" value="#ffffff">
+                            </div>
+                            <div class="mb-3">
+                                <label for="menu-text-color" class="form-label">Cor do Texto</label>
+                                <input type="color" class="form-control color-picker" id="menu-text-color" value="#000000">
+                            </div>
+                            <div class="mb-3">
+                                <label for="menu-padding" class="form-label">Espaçamento (padding)</label>
+                                <input type="range" class="form-range" id="menu-padding" min="0" max="30" value="10">
+                                <span id="menu-padding-value">10px</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="menu-item-padding" class="form-label">Espaçamento dos Itens</label>
+                                <input type="range" class="form-range" id="menu-item-padding" min="0" max="30" value="10">
+                                <span id="menu-item-padding-value">10px</span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Orientação do Menu</label>
+                                <select class="form-select" id="menu-orientation">
+                                    <option value="horizontal">Horizontal</option>
+                                    <option value="vertical">Vertical</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Imagem do Menu</label>
+                                <select class="form-select" id="menu-image-url">
+                                    <option value="">Sem Imagem</option>
+                                   
+                                </select>
+                                <div class="mb-3">
+                                  <label class="form-label">  Ou envie sua imagem para o menu:</label>
+                                  <input type="file" class="form-control menu-image-upload" accept="image/*">
+                              </div>
+                              <div class="mb-3">
+                                  <img id="menu-image-preview" class="menu-image-preview" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Prévia da imagem do menu" style="max-width: 100%; display: none;" />
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Posição da Imagem</label>
+                                <select class="form-select" id="menu-image-position">
+                                    <option value="top">Acima do Menu</option>
+                                    <option value="left">À Esquerda do Menu</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Itens do Menu</label>
+                                <div id="menu-items">
+                                    <div class="menu-item">
+                                        <div class="mb-2">
+                                            <label class="form-label">Texto do Item</label>
+                                            <input type="text" class="form-control menu-item-text" value="Início">
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label">Link</label>
+                                            <input type="text" class="form-control menu-item-link" value="#" placeholder="URL do link">
+                                        </div>
+                                        <button class="btn btn-danger btn-sm remove-menu-item">Remover</button>
+                                    </div>
+                                </div>
+                                <button id="add-menu-item" class="btn btn-primary mt-2">Adicionar Item</button>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
+                            <h3>Configurações da Galeria</h3>
+                            <div class="mb-3">
+                                <label for="gallery-bg-color" class="form-label">Cor de fundo da Galeria</label>
+                                <input type="color" class="form-control color-picker" id="gallery-bg-color" value="#f8f9fa">
+                            </div>
+                            <div class="mb-3">
+                                <label for="gallery-padding" class="form-label">Espaçamento (padding)</label>
+                                <input type="range" class="form-range" id="gallery-padding" min="0" max="50" value="20">
+                                <span id="gallery-padding-value">20px</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="gallery-card-bg-color" class="form-label">Cor de fundo dos Cards</label>
+                                <input type="color" class="form-control color-picker" id="gallery-card-bg-color" value="#ffffff">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="gallery-card-border-color" class="form-label">Cor da Borda dos Cards</label>
+                                <input type="color" class="form-control color-picker" id="gallery-card-border-color" value="#dddddd">
+                            </div>
+                            <div class="mb-3">
+                                <label for="gallery-card-text-color" class="form-label">Cor do Texto</label>
+                                <input type="color" class="form-control color-picker" id="gallery-card-text-color" value="#000000">
+                            </div>
+                            <div class="mb-3">
+                                <label for="gallery-columns" class="form-label">Número de Colunas</label>
+                                <select class="form-select" id="gallery-columns">
+                                    <option value="1">1 Coluna</option>
+                                    <option value="2">2 Colunas</option>
+                                    <option value="3" selected>3 Colunas</option>
+                                    <option value="4">4 Colunas</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label">Envie sua imagem para o card:</label>
+                              <input type="file" class="form-control gallery-image-upload" accept="image/*">
+                          </div>
+                          <div class="mb-3">
+                              <img class="gallery-image-preview" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Prévia da imagem do card" style="max-width: 100%; display: none;" />
+                          </div>
+
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Cards da Galeria</label>
+                                <div id="gallery-cards">
+                                    <div class="gallery-card">
+                                        <div class="mb-2">
+                                            <label class="form-label">Imagem</label>
+                                            <select class="form-select gallery-image">
+                                                <option value="/api/placeholder/300/200">Sem imagem</option>
+                                                
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="mb-2">
+                                            <label class="form-label">Título</label>
+                                            <input type="text" class="form-control gallery-title" value="Produto 1">
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label">Descrição</label>
+                                            <textarea class="form-control gallery-description">Descrição do produto ou serviço aqui.</textarea>
+                                        </div>
+                                        <button class="btn btn-danger btn-sm remove-gallery-card">Remover</button>
+                                    </div>
+                                </div>
+                                <button id="add-gallery-card" class="btn btn-primary mt-2">Adicionar Card</button>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+                            <h3>Configurações do Formulário</h3>
+                            <div class="mb-3">
+                                <label for="form-title" class="form-label">Título do Formulário</label>
+                                <input type="text" class="form-control" id="form-title" value="Entre em Contato">
+                            </div>
+                            <div class="mb-3">
+                                <label for="form-bg-color" class="form-label">Cor de fundo do Formulário</label>
+                                <input type="color" class="form-control color-picker" id="form-bg-color" value="#f8f9fa">
+                            </div>
+                            <div class="mb-3">
+                                <label for="form-padding" class="form-label">Espaçamento (padding)</label>
+                                <input type="range" class="form-range" id="form-padding" min="0" max="50" value="20">
+                                <span id="form-padding-value">20px</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="form-border-color" class="form-label">Cor da Borda</label>
+                                <input type="color" class="form-control color-picker" id="form-border-color" value="#dddddd">
+                            </div>
+                            <div class="mb-3">
+                                <label for="form-text-color" class="form-label">Cor do Texto</label>
+                                <input type="color" class="form-control color-picker" id="form-text-color" value="#000000">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Campos do Formulário</label>
+                                <div id="form-fields">
+                                    <div class="form-field">
+                                        <div class="mb-2">
+                                            <label class="form-label">Label</label>
+                                            <input type="text" class="form-control field-label" value="Nome:">
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label">Tipo de Campo</label>
+                                            <select class="form-select field-type">
+                                                <option value="text">Texto</option>
+                                                <option value="email">E-mail</option>
+                                                <option value="tel">Telefone</option>
+                                                <option value="date">Data</option>
+                                                <option value="number">Número</option>
+                                                <option value="textarea">Área de Texto</option>
+                                                <option value="select">Seleção</option>
+                                                <option value="radio">Rádio (Opções)</option>
+                                                <option value="checkbox">Checkbox</option>
+                                            </select>
+                                        </div>
+                                        <div class="field-options select-options d-none">
+                                            <div class="mb-2">
+                                                <label class="form-label">Opções (separadas por vírgula)</label>
+                                                <input type="text" class="form-control select-options-values" value="Opção 1, Opção 2, Opção 3">
+                                            </div>
+                                        </div>
+                                        <div class="field-options radio-options d-none">
+                                            <div class="mb-2">
+                                                <label class="form-label">Opções (separadas por vírgula)</label>
+                                                <input type="text" class="form-control radio-options-values" value="Opção 1, Opção 2, Opção 3">
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label">Obrigatório</label>
+                                            <select class="form-select field-required">
+                                                <option value="false">Não</option>
+                                                <option value="true">Sim</option>
+                                            </select>
+                                        </div>
+                                        <button class="btn btn-danger btn-sm remove-form-field">Remover</button>
+                                    </div>
+                                </div>
+                                <button id="add-form-field" class="btn btn-primary mt-2">Adicionar Campo</button>
+                            </div>
+                        </div>
+                       
+                        <div class="tab-pane fade" id="footer" role="tabpanel" aria-labelledby="footer-tab">
+                            <h3>Configurações do Rodapé</h3>
+                            <div class="mb-3">
+                                <label for="footer-bg-color" class="form-label">Cor de fundo</label>
+                                <input type="color" class="form-control color-picker" id="footer-bg-color" value="#343a40">
+                            </div>
+                            <div class="mb-3">
+                                <label for="footer-text-color" class="form-label">Cor do Texto</label>
+                                <input type="color" class="form-control color-picker" id="footer-text-color" value="#ffffff">
+                            </div>
+                            <div class="mb-3">
+                                <label for="footer-padding" class="form-label">Espaçamento (padding)</label>
+                                <input type="range" class="form-range" id="footer-padding" min="0" max="50" value="20">
+                                <span id="footer-padding-value">20px</span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="footer-text" class="form-label">Texto do Rodapé</label>
+                                <textarea class="form-control" id="footer-text" rows="3">© 2025 Meu Site. Todos os direitos reservados.</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="footer-text-align" class="form-label">Alinhamento do Texto</label>
+                                <select class="form-select" id="footer-text-align">
+                                    <option value="left">Esquerda</option>
+                                    <option value="center" selected>Centro</option>
+                                    <option value="right">Direita</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="footer-font-size" class="form-label">Tamanho da Fonte (px)</label>
+                                <input type="number" class="form-control" id="footer-font-size" value="14" min="10" max="24">
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="general" role="tabpanel" aria-labelledby="general-tab">
+                            <h3>Configurações Gerais</h3>
+                            <div class="mb-3">
+                                <label for="page-bg-color" class="form-label">Cor de fundo da Página</label>
+                                <input type="color" class="form-control color-picker" id="page-bg-color" value="#ffffff">
+                            </div>
+                            <div class="mb-3">
+                                <label for="page-font-family" class="form-label">Fonte da Página</label>
+                                <select class="form-select" id="page-font-family">
+                                    <option value="Arial, sans-serif">Arial</option>
+                                    <option value="'Times New Roman', serif">Times New Roman</option>
+                                    <option value="'Courier New', monospace">Courier New</option>
+                                    <option value="Georgia, serif">Georgia</option>
+                                    <option value="Verdana, sans-serif">Verdana</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="page-text-color" class="form-label">Cor do Texto</label>
+                                <input type="color" class="form-control color-picker" id="page-text-color" value="#212529">
+                            </div>
+                            <div class="mb-3">
+                                <label for="page-max-width" class="form-label">Largura Máxima (px)</label>
+                                <input type="number" class="form-control" id="page-max-width" value="1200" min="600" max="2000">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-3">
+                        <button id="update-preview" class="btn btn-primary">Atualizar Visualização</button>
+                        <button id="show-html" class="btn btn-secondary">Mostrar HTML</button>
+                        <button id="save-html" class="btn btn-success">Salvar HTML</button>
+                        <button id="load-html" class="btn btn-info">Carregar HTML</button>
+                        <button id="clear-storage" class="btn btn-danger">Limpar Storage</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <h3>Visualização da Página</h3>
+                <div class="preview-panel">
+                    <div id="page-preview">
+                        <div class="preview-header">
+                           
+                        </div>
+                        <div class="preview-menu">
+                        </div>
+                        <div class="preview-gallery">
+                        </div>
+                        <div class="preview-form">
+                        </div>
+                        <div class="preview-footer">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="code-panel d-none" id="html-code">
+                    <h3 class="mb-3">Código HTML Gerado</h3>
+                    <pre id="html-code-content"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/script.js"></script>
+</body>
+
