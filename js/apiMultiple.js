@@ -31,13 +31,15 @@ export function initApiMultiple() {
 
       try {
         // Chamadas para múltiplas APIs
-        const [user, starWars, cep, fipeBrands] = await Promise.all([
+        // ATENÇÃO: 'starWars' foi substituído por 'exchangeRates'
+        const [user, exchangeRates, cep, fipeBrands] = await Promise.all([
           fetch("https://jsonplaceholder.typicode.com/users/1").then(r => {
             if (!r.ok) throw new Error("Erro na API jsonplaceholder");
             return r.json();
           }),
-          fetch("https://swapi.dev/api/people/1/").then(r => {
-            if (!r.ok) throw new Error("Erro na API Star Wars");
+          // NOVA API DE COTAÇÃO DE MOEDAS SUBSTITUINDO A SWAPI
+          fetch("https://api.exchangerate-api.com/v4/latest/USD").then(r => {
+            if (!r.ok) throw new Error("Erro na API de Cotação de Moedas");
             return r.json();
           }),
           fetch("https://brasilapi.com.br/api/cep/v1/01001000").then(r => {
@@ -54,8 +56,8 @@ export function initApiMultiple() {
         resultDiv.innerHTML = `
           <h5>Usuário (jsonplaceholder)</h5>
           <pre>${JSON.stringify(user, null, 2)}</pre>
-          <h5>Personagem Star Wars</h5>
-          <pre>${JSON.stringify(starWars, null, 2)}</pre>
+          <h5>Cotação de Moedas (ExchangeRate-API)</h5>
+          <pre>${JSON.stringify(exchangeRates, null, 2)}</pre>
           <h5>Endereço via CEP (BrasilAPI)</h5>
           <pre>${JSON.stringify(cep, null, 2)}</pre>
           <h5>Marcas de Carros (API FIPE)</h5>
@@ -69,9 +71,10 @@ export function initApiMultiple() {
             <h4>Usuário</h4>
             <p><strong>Nome:</strong> ${user.name}</p>
             <p><strong>Email:</strong> ${user.email}</p>
-            <h4>Personagem Star Wars</h4>
-            <p><strong>Nome:</strong> ${starWars.name}</p>
-            <p><strong>Altura:</strong> ${starWars.height} cm</p>
+            <h4>Cotações de Moedas (Base USD)</h4>
+            <p><strong>USD para BRL:</strong> ${exchangeRates.rates.BRL ? exchangeRates.rates.BRL.toFixed(4) : 'N/A'}</p>
+            <p><strong>USD para EUR:</strong> ${exchangeRates.rates.EUR ? exchangeRates.rates.EUR.toFixed(4) : 'N/A'}</p>
+            <p><strong>USD para JPY:</strong> ${exchangeRates.rates.JPY ? exchangeRates.rates.JPY.toFixed(4) : 'N/A'}</p>
             <h4>CEP</h4>
             <p><strong>CEP:</strong> ${cep.cep}</p>
             <p><strong>Localidade:</strong> ${cep.city} - ${cep.state}</p>
